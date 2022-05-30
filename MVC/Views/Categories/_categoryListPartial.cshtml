@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TNAI.Model.Entities.Category>
+
+<div class="list">
+    <div class="row">
+        <div class="title">Id</div>
+        <div class="title">Name</div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="">@item.Id</div>
+            <div class="">@item.Name</div>
+        </div>
+    }
+</div>
