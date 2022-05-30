@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.panel {
+    margin-top: 30px;
+}
+
+.panel-info {
+    max-width: 50%;
+}
+
+.post-title {
+    font-size: 28px;
+    font-weight: bold;
+}

@@ -17,11 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Blog", "Index", "Posts", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Posts")</li>
+                    <li class="btn-default">@Html.ActionLink("Create New Post", "Create", "Posts")</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Categories", "Index", "Categories")</li>

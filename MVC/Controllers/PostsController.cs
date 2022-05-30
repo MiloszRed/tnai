@@ -125,6 +125,14 @@ namespace MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        //[HttpGet]
+        public ActionResult CommentListPartial(int? id)
+        {
+            var post = Task.Run(() => _postRepository.GetPostAsync(id.Value)).Result;
+            var comments = post.Comments;
+            return PartialView("_commentsListPartial", comments);
+        }
+
         /*protected override void Dispose(bool disposing)
         {
             if (disposing)

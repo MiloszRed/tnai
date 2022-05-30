@@ -56,7 +56,7 @@ namespace MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Author,Content")] Comment comment)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Author,Text,PostId")] Comment comment)
         {
             if (!ModelState.IsValid)
             {
