@@ -21,10 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Posts")</li>
-                    <li class="btn-default">@Html.ActionLink("Create New Post", "Create", "Posts")</li>
+                    <li>@Html.ActionLink("All posts", "Index", "Posts")</li>
                     @if (Request.IsAuthenticated)
                     {
+                        <li class="btn-default">@Html.ActionLink("Create New Post", "Create", "Posts")</li>
                         <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                     }
                 </ul>

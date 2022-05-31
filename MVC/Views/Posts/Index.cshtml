@@ -12,14 +12,18 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 class="panel-title post-title">@Html.DisplayFor(modelItem => item.Title)</h1>
+            by @Html.DisplayFor(modelItem => item.Author)
         </div>
         <div class="panel-body">
             @Html.DisplayFor(modelItem => item.Content)
-        </div>
+        </div>  
         <div class="panel-footer">
             @Html.ActionLink("Read more", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            @if (Request.IsAuthenticated)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
         </div>
     </div>
 }

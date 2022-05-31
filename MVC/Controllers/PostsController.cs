@@ -16,6 +16,7 @@ namespace MVC.Controllers
     public class PostsController : Controller
     {
         private readonly IPostRepository _postRepository;
+        //private ApplicationUserManager _userManager;
         // private AppDbContext db = new AppDbContext();
 
         public PostsController(IPostRepository postRepository)
@@ -59,9 +60,21 @@ namespace MVC.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Id,Title,Author,Content")] Post post)
         {
             if (!ModelState.IsValid)
-            {
                 return View(post);
-            }
+
+
+
+
+
+
+
+            // (post != null)
+            //    post.Author = bieżący użytkownik
+
+
+
+
+
 
             var result = await _postRepository.SavePostAsync(post);
             if (!result)
