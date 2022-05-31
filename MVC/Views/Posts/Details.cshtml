@@ -20,4 +20,4 @@
 </div>
 
 @Html.Action("CommentListPartial", "Posts", new { Model.Id })
-@Html.Action("Create", "Comments", new { Model.Id })
+@Html.Action("Create", "Comments", new { PostId = Model.Id })

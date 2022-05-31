@@ -46,9 +46,11 @@ namespace MVC.Controllers
         }
 
         // GET: Comments/Create
-        public ActionResult Create()
+        public ActionResult Create(int PostId)
         {
-            return View();
+            var comment = new Comment();
+            comment.PostId = PostId;
+            return View(comment);
         }
 
         // POST: Comments/Create
@@ -67,7 +69,7 @@ namespace MVC.Controllers
             if (!result)
                 return View("Error");
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Posts", new { id = comment.PostId });
         }
 
         // GET: Comments/Edit/5
