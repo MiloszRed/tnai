@@ -57,23 +57,15 @@ namespace MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Author,Content")] Post post)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content")] Post post)
         {
             if (!ModelState.IsValid)
                 return View(post);
 
 
-
-
-
-
-
-            // (post != null)
-            //    post.Author = bieżący użytkownik
-
-
-
-
+            if (post != null)
+                // Jako autora ustawiamy zalogowanego użytkownika (jego e-mail - ewn. można wyciąć tylko to, co jest przed małpą).
+                post.Author = System.Web.HttpContext.Current.User.Identity.Name; // Czy to dobry sposób na dostanie się do bieżącego użytkownika?
 
 
             var result = await _postRepository.SavePostAsync(post);
