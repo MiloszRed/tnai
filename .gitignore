@@ -1,0 +1,6 @@
+*.config
+.vs/TNAI2022/v16/.suo
+*.dll
+*.pdb
+*.cache
+*.txt
