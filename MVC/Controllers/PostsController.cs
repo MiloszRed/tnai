@@ -67,6 +67,7 @@ namespace MVC.Controllers
                 // Jako autora ustawiamy zalogowanego użytkownika (jego e-mail - ewn. można wyciąć tylko to, co jest przed małpą).
                 post.Author = System.Web.HttpContext.Current.User.Identity.Name; // Czy to dobry sposób na dostanie się do bieżącego użytkownika?
 
+            System.Diagnostics.Debug.WriteLine(post.Author);
 
             var result = await _postRepository.SavePostAsync(post);
             if (!result)
