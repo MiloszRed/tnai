@@ -8,7 +8,7 @@
 @using (Html.BeginForm("Create", "Comments", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
-    
+        
     <div class="form-horizontal">
         <h4>Add New Comment</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
