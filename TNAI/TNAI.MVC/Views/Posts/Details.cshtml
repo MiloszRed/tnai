@@ -1,0 +1,23 @@
+﻿@model TNAI.Model.Entities.Post
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title post-title">@Html.DisplayFor(model => model.Title)</h1>
+    </div>
+    <div class="panel-body">
+        @Html.DisplayFor(model => model.Content)
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+    </div>
+</div>
+
+@Html.Action("CommentListPartial", "Posts", new { Model.Id })
+@Html.Action("Create", "Comments", new { PostId = Model.Id })

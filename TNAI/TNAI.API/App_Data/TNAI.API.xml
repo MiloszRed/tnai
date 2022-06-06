@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TNAI.API</name>
+    </assembly>
+    <members>
+        <member name="T:TNAI.API.UnityConfig">
+            <summary>
+            Specifies the Unity configuration for the main container.
+            </summary>
+        </member>
+        <member name="P:TNAI.API.UnityConfig.Container">
+            <summary>
+            Configured Unity Container.
+            </summary>
+        </member>
+        <member name="M:TNAI.API.UnityConfig.RegisterTypes(Unity.IUnityContainer)">
+            <summary>
+            Registers the type mappings with the Unity container.
+            </summary>
+            <param name="container">The unity container to configure.</param>
+            <remarks>
+            There is no need to register concrete types such as controllers or
+            API controllers (unless you want to change the defaults), as Unity
+            allows resolving a concrete type even if it was not previously
+            registered.
+            </remarks>
+        </member>
+        <member name="T:TNAI.API.UnityWebApiActivator">
+            <summary>
+            Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET.
+            </summary>
+        </member>
+        <member name="M:TNAI.API.UnityWebApiActivator.Start">
+            <summary>
+            Integrates Unity when the application starts.
+            </summary>
+        </member>
+        <member name="M:TNAI.API.UnityWebApiActivator.Shutdown">
+            <summary>
+            Disposes the Unity container when the application is shut down.
+            </summary>
+        </member>
+        <member name="M:TNAI.API.Controllers.CategoryController.Get(System.Int32)">
+            <summary>
+            Get selected category.
+            </summary>
+            <param name="id">Category identifier.</param>
+            <returns>Details</returns>
+        </member>
+        <member name="M:TNAI.API.Controllers.CategoryController.GetAll">
+            <summary>
+            Get all categories.
+            </summary>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:TNAI.API.Controllers.CategoryController.Put(System.Int32,TNAI.API.Models.InputModels.Category.CategoryInputModel)">
+            <param name="id">Id kategorii, którą chcemy zmienić.</param>
+            <param name="model">Nowe dane kategorii.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TNAI.API.Controllers.ProductsController.Get(System.Int32)">
+            <summary>
+            Get selected product.
+            </summary>
+            <param name="id">Product identifier.</param>
+            <returns>Details</returns>
+        </member>
+        <member name="M:TNAI.API.Controllers.ProductsController.GetAll">
+            <summary>
+            Get all products.
+            </summary>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:TNAI.API.Controllers.ProductsController.Put(System.Int32,TNAI.API.Models.InputModels.Products.ProductInputModel)">
+            <param name="id">Id produktu, który chcemy zmienić.</param>
+            <param name="model">Nowe dane produktu.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TNAI.API.Models.InputModels.Category.CategoryInputModel.Name">
+            <summary>
+            Category name.
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.InputModels.Products.ProductInputModel.Name">
+            <summary>
+            Product name.
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.InputModels.Products.ProductInputModel.Price">
+            <summary>
+            Product price.
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.InputModels.Products.ProductInputModel.CategoryId">
+            <summary>
+            Category identifier.
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.OutputModels.Category.CategoryOutputModel.Id">
+            <summary>
+            Category identifier
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.OutputModels.Category.CategoryOutputModel.Name">
+            <summary>
+            Category name
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.OutputModels.Products.ProductOutputModel.Id">
+            <summary>
+            Product identifier
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.OutputModels.Products.ProductOutputModel.Name">
+            <summary>
+            Product name
+            </summary>
+        </member>
+        <member name="P:TNAI.API.Models.OutputModels.Products.ProductOutputModel.CategoryName">
+            <summary>
+            Product category name
+            </summary>
+        </member>
+    </members>
+</doc>
