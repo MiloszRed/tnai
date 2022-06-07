@@ -1,0 +1,17 @@
+﻿@model IEnumerable<TNAI.Model.Entities.Comment>
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">@Html.DisplayFor(modelItem => item.Author)</h1>
+        </div>
+        <div class="panel-body">
+            @Html.DisplayFor(modelItem => item.Text)
+        </div>
+        <div class="panel-footer">
+            @*Trzeba podmienic na edit z CommentsController*@
+            @Html.ActionLink("Edit", $"Edit/{item.Id}", "Comments")
+        </div>
+    </div>
+}

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<TNAI.Model.Entities.Post>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Posts</h1>
+
+@Html.Partial("_postsListPartial", Model)
+
