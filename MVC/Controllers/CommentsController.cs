@@ -48,7 +48,7 @@ namespace MVC.Controllers
         }
 
         // GET: Comments/Create
-        [Authorize(Roles = "Admin, User")]
+        [AllowAnonymous]
         public ActionResult Create(int PostId)
         {
             var comment = new Comment();
@@ -64,6 +64,9 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Text,PostId")] Comment comment)
         {
+            if (!User.IsInRole("User") && !User.IsInRole("Admin"))
+                return RedirectToAction("Login", "Account");
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Details", "Posts", new { id = comment.PostId });
@@ -102,8 +105,6 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Author,Text,PostId")] Comment comment)
         {
-            System.Diagnostics.Debug.WriteLine(comment.Author);
-            System.Diagnostics.Debug.WriteLine(User.Identity.Name);
             if (User.IsInRole("User") && User.Identity.Name != comment.Author)
                 return RedirectToAction("Login", "Account");
 

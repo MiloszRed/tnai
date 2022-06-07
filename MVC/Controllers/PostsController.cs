@@ -144,6 +144,7 @@ namespace MVC.Controllers
         }
 
         //[HttpGet]
+        [AllowAnonymous]
         public ActionResult CommentListPartial(int? id)
         {
             var post = Task.Run(() => _postRepository.GetPostAsync(id.Value)).Result;
