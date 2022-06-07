@@ -13,6 +13,7 @@ using TNAI.Respository.Abstract;
 
 namespace MVC.Controllers
 {
+    [AllowAnonymous]
     public class CommentsController : Controller
     {
         private readonly ICommentRepository _commentRepository;
@@ -24,6 +25,7 @@ namespace MVC.Controllers
         }
 
         // GET: Comments
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             var posts = await _commentRepository.GetAllCommentsAsync();
@@ -46,6 +48,7 @@ namespace MVC.Controllers
         }
 
         // GET: Comments/Create
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create(int PostId)
         {
             var comment = new Comment();
@@ -57,12 +60,13 @@ namespace MVC.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Text,PostId")] Comment comment)
         {
             if (!ModelState.IsValid)
             {
-                return View(comment);
+                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
             if (comment != null)
                 comment.Author = System.Web.HttpContext.Current.User.Identity.Name;
@@ -75,6 +79,7 @@ namespace MVC.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,18 +98,25 @@ namespace MVC.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Author,Content")] Comment comment)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Author,Text,PostId")] Comment comment)
         {
+            System.Diagnostics.Debug.WriteLine(comment.Author);
+            System.Diagnostics.Debug.WriteLine(User.Identity.Name);
+            if (User.IsInRole("User") && User.Identity.Name != comment.Author)
+                return RedirectToAction("Login", "Account");
+
             if (ModelState.IsValid)
             {
                 await _commentRepository.SaveCommentAsync(comment);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = comment.Id });
             }
             return View(comment);
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,12 +133,16 @@ namespace MVC.Controllers
 
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin, User")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Comment comment = await _commentRepository.GetCommentAsync(id);
+            if (User.IsInRole("User") && User.Identity.Name != comment.Author)
+                return RedirectToAction("Login", "Account");
+            
             await _commentRepository.DeleteCommentAsync(comment.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Posts", new { id = comment.PostId });
         }
 
         /*protected override void Dispose(bool disposing)

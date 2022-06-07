@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using TNAI.Model;
 using TNAI.Model.Entities;
 using TNAI.Respository.Abstract;
+using Microsoft.AspNet.Identity;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly IPostRepository _postRepository;
@@ -25,6 +27,7 @@ namespace MVC.Controllers
         }
 
         // GET: Posts
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             var posts = await _postRepository.GetAllPostsAsync();
@@ -32,6 +35,7 @@ namespace MVC.Controllers
         }
 
         // GET: Posts/Details/5
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +51,7 @@ namespace MVC.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             return View();
@@ -56,6 +61,7 @@ namespace MVC.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content")] Post post)
         {
@@ -67,8 +73,6 @@ namespace MVC.Controllers
                 // Jako autora ustawiamy zalogowanego użytkownika (jego e-mail - ewn. można wyciąć tylko to, co jest przed małpą).
                 post.Author = System.Web.HttpContext.Current.User.Identity.Name; // Czy to dobry sposób na dostanie się do bieżącego użytkownika?
 
-            System.Diagnostics.Debug.WriteLine(post.Author);
-
             var result = await _postRepository.SavePostAsync(post);
             if (!result)
                 return View("Error");
@@ -77,6 +81,7 @@ namespace MVC.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,9 +100,12 @@ namespace MVC.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Author,Content")] Post post)
         {
+            if (User.IsInRole("User") && User.Identity.Name != post.Author)
+                return RedirectToAction("Login", "Account");
             if (ModelState.IsValid)
             {
                 await _postRepository.SavePostAsync(post);
@@ -107,6 +115,7 @@ namespace MVC.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -122,11 +131,14 @@ namespace MVC.Controllers
         }
 
         // POST: Posts/Delete/5
+        [Authorize(Roles = "Admin, User")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Post post = await _postRepository.GetPostAsync(id);
+            if (User.IsInRole("User") && User.Identity.Name != post.Author)
+                return RedirectToAction("Login", "Account");
             await _postRepository.DeletePostAsync(post.Id);
             return RedirectToAction("Index");
         }
