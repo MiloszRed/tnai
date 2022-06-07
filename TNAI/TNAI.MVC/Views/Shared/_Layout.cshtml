@@ -24,6 +24,7 @@
                     <li>@Html.ActionLink("All posts", "Index", "Posts")</li>
                     @if (Request.IsAuthenticated)
                     {
+                        <li class="btn-default">@Html.ActionLink("Your posts", $"Author/{Context.User.Identity.Name}", "Posts")</li>
                         <li class="btn-default">@Html.ActionLink("Create New Post", "Create", "Posts")</li>
                     }
                 </ul>

@@ -13,10 +13,13 @@
         @Html.DisplayFor(model => model.Content)
     </div>
     <div class="panel-footer">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
-        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
-    </div>
+        @if (Request.IsAuthenticated && (Model.Author?.Equals(Context.User.Identity.Name) ?? false)) // Author może być nullem dla postów sprzed migracji.
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        }
+        @*@Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })*@
+        </div>
 </div>
 
 @Html.Action("CommentListPartial", "Posts", new { Model.Id })

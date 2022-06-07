@@ -1,31 +1,11 @@
 ﻿@model IEnumerable<TNAI.Model.Entities.Post>
 
 @{
-    ViewBag.Title = "Author's Posts";
+    ViewBag.Title = Model.Any() ? $"{Model.First().Author}'s Posts" : "Empty blog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Posts</h1>
 
-@Html.Action("PostListPartial", "Posts", new { posts = Model })
+@Html.Partial("_postsListPartial", Model)
 
-@*@foreach (var item in Model)
-    {
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1 class="panel-title post-title">@Html.DisplayFor(modelItem => item.Title)</h1>
-                by @Html.DisplayFor(modelItem => item.Author)
-            </div>
-            <div class="panel-body">
-                @Html.DisplayFor(modelItem => item.Content)
-            </div>
-            <div class="panel-footer">
-                @Html.ActionLink("Read more", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
-                @if (Request.IsAuthenticated)
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                }
-            </div>
-        </div>
-    }*@

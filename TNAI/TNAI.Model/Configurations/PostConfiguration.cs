@@ -15,7 +15,7 @@ namespace TNAI.Model.Configurations
 
             Property(x => x.Title).HasMaxLength(100);
 
-            Property(x => x.DateTime).HasMaxLength(20);
+            Property(x => x.DateTime).HasMaxLength(25);
         }
     }
 }

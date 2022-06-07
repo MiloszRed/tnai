@@ -54,7 +54,7 @@ namespace TNAI.Repository.Concrete
 
             try
             {
-                Context.Entry(post).State = post.Id == default(int) ? EntityState.Added : EntityState.Modified;
+                Context.Entry(post).State = (post.Id == default(int)) ? EntityState.Added : EntityState.Modified;
 
                 await Context.SaveChangesAsync();
             }

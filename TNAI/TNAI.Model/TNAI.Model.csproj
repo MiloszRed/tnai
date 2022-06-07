@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202206062105433_datatime.designer.cs">
       <DependentUpon>202206062105433_datatime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206062316353_datetime_fix_in_post.cs" />
+    <Compile Include="Migrations\202206062316353_datetime_fix_in_post.designer.cs">
+      <DependentUpon>202206062316353_datetime_fix_in_post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206062105433_datatime.resx">
       <DependentUpon>202206062105433_datatime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206062316353_datetime_fix_in_post.resx">
+      <DependentUpon>202206062316353_datetime_fix_in_post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

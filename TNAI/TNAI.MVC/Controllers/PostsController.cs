@@ -41,7 +41,7 @@ namespace MVC.Controllers
             var posts = await _postRepository.GetAuthorPostsAsync(id);
 
             if (posts == null || posts.Count == 0)
-                return HttpNotFound(); // NotFound: 404
+                return HttpNotFound("No posts for that user."); // NotFound: 404
 
             return View(posts);
         }
@@ -84,7 +84,7 @@ namespace MVC.Controllers
             
             System.Diagnostics.Debug.WriteLine(post.Author);
 
-            post.DateTime = DateTime.Now.ToString("yyyy-MM-dd-mm-ss-ff");
+            post.DateTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ff");
             var result = await _postRepository.SavePostAsync(post);
 
             if (!result)
@@ -105,7 +105,7 @@ namespace MVC.Controllers
                 return HttpNotFound();
 
             if (post.Author != System.Web.HttpContext.Current.User.Identity.Name)
-                return HttpNotFound();
+                return View("AccessDenied");
 
             return View(post);
         }
@@ -115,13 +115,19 @@ namespace MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Author,Content")] Post post)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
-                await _postRepository.SavePostAsync(post);
+                // Aby zachować zawartość pozostałych pól (Author i DataTime).
+                Post orginal = await _postRepository.GetPostAsync(post.Id);
+                orginal.Content = post.Content;
+                orginal.Title = post.Title;
+
+                await _postRepository.SavePostAsync(orginal);
                 return RedirectToAction("Index");
             }
+
             return View(post);
         }
 
@@ -137,7 +143,7 @@ namespace MVC.Controllers
                 return HttpNotFound();
 
             if (post.Author != System.Web.HttpContext.Current.User.Identity.Name)
-                return HttpNotFound();
+                return View("AccessDenied");
 
             return View(post);
         }
@@ -160,10 +166,10 @@ namespace MVC.Controllers
             return PartialView("_commentsListPartial", comments);
         }
 
-        public ActionResult PostListPartial(IEnumerable<Post> posts)
-        {
-            return PartialView("_postsListPartial", posts);
-        }
+        //public ActionResult PostListPartial(IEnumerable<Post> posts)
+        //{
+        //    return PartialView("_postsListPartial", posts);
+        //}
 
         /*protected override void Dispose(bool disposing)
         {

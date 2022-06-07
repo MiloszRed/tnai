@@ -21,6 +21,7 @@ namespace TNAI.Model.Entities
 
         public virtual ICollection<Comment> Comments { get; set; }
 
+        [MaxLength(25)]
         public string DateTime { get; set; }
     }
 }
