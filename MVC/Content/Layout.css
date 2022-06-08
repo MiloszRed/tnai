@@ -1,0 +1,171 @@
+﻿/*<link rel="stylesheet" href="~/Content/Layout.css">*/
+
+* {
+    padding: 5px;
+    overflow: hidden;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: cyan;
+    border-style: dotted;
+    border-width: 1px;
+    border-color: black;
+    border-left-style: solid;
+    border-left-width: 3px;
+    border-left-color: darkcyan;
+}
+
+div, address {
+    background-color: cyan;
+    border-width: 1px;
+    border-style: dotted;
+    border-color: darkcyan;
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-left-color: darkcyan;
+}
+
+div.navbar {
+    padding: 15px;
+    background-color: lightblue;
+    border-width: 1px;
+    border-style: solid;
+}
+
+div.navbar-header {
+    padding: 15px;
+    background-color: lightblue;
+    border-width: 1px;
+    border-style: dotted;
+    text-align: center;
+}
+
+div.form-group {
+    background-color: lightgoldenrodyellow;
+    border-width: 2px;
+    border-style: solid;
+    text-align: right;
+}
+
+div.col-md-4 {
+    background-color: lightseagreen;
+    border-width: 0;
+    text-align: center;
+}
+div.col-md-8 {
+    background-color: lightseagreen;
+    border-width: 0;
+    text-align: center;
+}
+div.col-md-10 {
+    background-color: lightseagreen;
+    border-width: 0;
+    text-align: center;
+}
+
+.button {
+    padding: 15px;
+    background-color: lightsteelblue;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+ul {
+    background-color: lightcyan;
+    border-style: solid;
+    border-color: black;
+    text-align: right;
+}
+
+li {
+    padding: 5px;
+    background-color: white;
+    border-style: none;
+    text-decoration: underline;
+    text-align: right;
+}
+
+footer {
+    padding: 5px;
+    opacity: 25%;
+    text-align: center;
+    background: none;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    font-style: italic;
+}
+h2 {
+    text-align: center;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+h3 {
+    text-align: right;
+    text-decoration: none;
+    font-style: oblique;
+}
+h4 {
+    text-align: right;
+    text-decoration: none;
+    font-style: oblique;
+}
+
+p {
+    text-decoration: none;
+    font-style: normal;
+    background-color: lightgray;
+}
+
+input {
+
+    text-decoration: overline underline;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+hgroup {
+    background-color: cyan;
+    border-width: 1px;
+    border-style: dotted;
+    border-color: darkcyan;
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-left-color: darkcyan;
+}
+
+dl {
+    background: inherit;
+}
+dt {
+    background-color: lightcoral;
+    border-width: 1px;
+    border-left-style: dotted;
+    border-right-style: dotted;
+    text-decoration: overline;
+}
+dd {
+    background-color: lightpink;
+    border-width: 1px;
+    border-left-style: dotted;
+}
+
+table {
+    background-color: lightgreen;
+    border-width: 2px;
+    border-style: solid;
+}
+tr, th {
+    background-color: lightsalmon;
+    border-width: 1px;
+    border-style: solid;
+}
