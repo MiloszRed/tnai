@@ -10,7 +10,7 @@ namespace TNAI.MVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Posts");
         }
 
         public ActionResult About()
