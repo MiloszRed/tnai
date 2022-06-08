@@ -79,7 +79,7 @@ namespace MVC.Controllers
 
 
             if (post != null)
-                // Jako autora ustawiamy zalogowanego użytkownika (jego e-mail - ewn. można wyciąć tylko to, co jest przed małpą).
+                // Jako autora ustawiamy zalogowanego użytkownika (UserName).
                 post.Author = System.Web.HttpContext.Current.User.Identity.Name; // Czy to dobry sposób na dostanie się do bieżącego użytkownika?
             
             System.Diagnostics.Debug.WriteLine(post.Author);

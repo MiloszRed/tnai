@@ -1,0 +1,19 @@
+﻿@model TNAI.Model.Entities.Post
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title post-title">@Html.DisplayFor(modelItem => Model.Title)</h1>
+        by @Html.DisplayFor(modelItem => Model.Author)
+    </div>
+    <div class="panel-body">
+        @Html.DisplayFor(modelItem => Model.Content)
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Read more", "Details", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @if (Request.IsAuthenticated && (Model.Author?.Equals(Context.User.Identity.Name) ?? false)) // Author może być nullem dla postów sprzed migracji.
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        }
+    </div>
+</div>
