@@ -10,8 +10,11 @@
             @Html.DisplayFor(modelItem => item.Text)
         </div>
         <div class="panel-footer">
-            @*Trzeba podmienic na edit z CommentsController*@
-            @Html.ActionLink("Edit", $"Edit/{item.Id}", "Comments")
-        </div>
+            @if (Request.IsAuthenticated
+                && ( (item.Author?.Equals(Context.User.Identity.Name) ?? false) || Context.User.IsInRole("Admin") )) // Author może być nullem dla postów sprzed migracji.
+            {
+                @Html.ActionLink("Edit", $"Edit/{item.Id}", "Comments")
+            }
+            </div>
     </div>
 }

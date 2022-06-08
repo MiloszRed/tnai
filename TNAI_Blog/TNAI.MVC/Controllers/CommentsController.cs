@@ -91,7 +91,7 @@ namespace MVC.Controllers
             if (comment == null)
                 return HttpNotFound();
 
-            if (comment.Author != System.Web.HttpContext.Current.User.Identity.Name)
+            if ((!User.IsInRole("Admin")) && comment.Author != System.Web.HttpContext.Current.User.Identity.Name)
                 return View("AccessDenied");
 
             return View(comment);

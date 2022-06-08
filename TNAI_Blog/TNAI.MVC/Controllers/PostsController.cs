@@ -123,13 +123,17 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content")] Post post)
         {
-            if (User.IsInRole("User") && User.Identity.Name != post.Author)
-                return View("AccessDenied");
-
             if (ModelState.IsValid)
             {
                 // Aby zachować zawartość pozostałych pól (Author i DataTime).
                 Post orginal = await _postRepository.GetPostAsync(post.Id);
+
+                if (orginal == null)
+                    return HttpNotFound();
+
+                if (User.IsInRole("User") && User.Identity.Name != orginal.Author)
+                    return View("AccessDenied");
+
                 orginal.Content = post.Content;
                 orginal.Title = post.Title;
 
