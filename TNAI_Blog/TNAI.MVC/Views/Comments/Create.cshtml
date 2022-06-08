@@ -1,7 +1,7 @@
 ﻿@model TNAI.Model.Entities.Comment
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create your comment";
     Layout = "~/Views/Shared/_BlankLayout.cshtml";
 }
 
@@ -12,7 +12,9 @@
     <div class="form-horizontal">
         <h4>Add New Comment</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        <div>
+            <p>Remember about our terms of agreetment, use and policy!</p>
+        </div>
         <div class="form-group">
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Text, new { cols = 35, @rows = 3 })
